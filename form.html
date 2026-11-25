@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            width: 350px;
+            padding: 20px;
+            border: 1px solid gray;
+            border-radius: 8px;
+            background-color: white;
+            margin: 0 auto;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            width: auto;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        table {
+            margin-top: 30px;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Student Information Form</h2>
+
+    <form id="studentForm">
+
+        <label>Name:</label>
+        <input type="text" id="name" required>
+
+        <label>Student ID:</label>
+        <input type="text" id="studentId" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" required>
+
+        <label>Age:</label>
+        <input type="number" id="age" required>
+
+        <label>Department:</label>
+        <select id="department" required>
+            <option value="">Select Department</option>
+            <option value="CSE">CSE</option>
+            <option value="EEE">EEE</option>
+            <option value="BBA">BBA</option>
+            <option value="English">English</option>
+            <option value="Civil">Civil</option>
+        </select>
+
+        <br>
+
+        <label>Gender:</label><br>
+
+        <input type="radio" name="gender" value="Male" required>
+        Male
+
+        <input type="radio" name="gender" value="Female">
+        Female
+
+        <input type="radio" name="gender" value="Other">
+        Other
+
+        <br><br>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+
+    <h2>Student Information Table</h2>
+
+    <table id="studentTable">
+
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Student ID</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Department</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody">
+        </tbody>
+
+    </table>
+
+
+    <script>
+
+        let form = document.getElementById("studentForm");
+
+        form.addEventListener("submit", function(event) {
+
+            // Prevent page refresh
+            event.preventDefault();
+
+            // Get input values
+            let name = document.getElementById("name").value;
+            let studentId = document.getElementById("studentId").value;
+            let email = document.getElementById("email").value;
+            let age = document.getElementById("age").value;
+            let department = document.getElementById("department").value;
+
+            // Get selected gender
+            let gender = document.querySelector(
+                'input[name="gender"]:checked'
+            ).value;
+
+            // Get table body
+            let tableBody = document.getElementById("tableBody");
+
+            // Create a new row
+            let newRow = document.createElement("tr");
+
+            // Insert data into table cells
+            [name, studentId, email, age, department, gender].forEach(function(value) {
+
+                let cell = document.createElement("td");
+
+                cell.textContent = value;
+
+                newRow.appendChild(cell);
+
+            });
+
+            // Add new row to table
+            tableBody.appendChild(newRow);
+
+            // Clear form
+            form.reset();
+
+        });
+
+    </script>
+
+</body>
+</html>
